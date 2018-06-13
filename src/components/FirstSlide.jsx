@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 import { bio } from "../assets/data";
-import Fade from "@material-ui/core/Fade";
 import Slide from "@material-ui/core/Slide";
 import TextParser from "./TextParser";
 import Connect from "./Connect";

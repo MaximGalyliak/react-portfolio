@@ -21,18 +21,17 @@ class Page extends Component {
       slide: 1,
     };
   }
-  _updateHeight = () => {
-    this.setState({ windowHeight: window.innerHeight });
+
+  _updateOnScroll = e => {
+    e.deltaY < 0 && this.setState({ slide: 1 });
+    e.deltaY > 0 && this.setState({ slide: 2 });
   };
 
-  componentWillMount() {
-    this._updateHeight();
-  }
   componentDidMount() {
-    window.addEventListener("resize", this._updateHeight);
+    window.addEventListener("wheel", this._updateOnScroll);
   }
   componentWillUnmount() {
-    window.removeEventListener("resize", this._updateHeight);
+    window.removeEventListener("wheel", this._updateOnScroll);
   }
   changeSlide = number => {
     return () => {
@@ -59,7 +58,9 @@ class Page extends Component {
         </AppBar>
         <div style={{ marginTop: 80 }}>
           {this.state.slide === 1 && <FirstSlide />}
-          {this.state.slide === 2 && <SecondSlide />}
+          {this.state.slide === 2 && (
+            <SecondSlide scroll={this._updateOnScroll} />
+          )}
         </div>
       </MuiThemeProvider>
     );
